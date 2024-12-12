@@ -1,3 +1,5 @@
+from typing import List
+
 from constants import *
 from spaceship import Spaceship
 from utilities import draw_window, draw_winner, load_assets
@@ -5,23 +7,20 @@ from utilities import draw_window, draw_winner, load_assets
 
 class Game:
     def __init__(self):
-
-        self.red = Spaceship(700, 300, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, RED, VEL)
-        self.yellow = Spaceship(
+        self.red: Spaceship = Spaceship(
+            700, 300, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, RED, VEL
+        )
+        self.yellow: Spaceship = Spaceship(
             100, 300, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, YELLOW, VEL
         )
+        self.assets: Dict[str, pygame.Surface] = load_assets()
+        self.clock: pygame.time.Clock = pygame.time.Clock()
+        self.running: bool = True
+        self.power_ups: List[pygame.Rect] = []
+        self.boundary: pygame.Rect = pygame.Rect(50, 50, WIDTH - 100, HEIGHT - 100)
+        self.frames_since_last_shrink: int = 0
 
-        self.assets = load_assets()
-        self.clock = pygame.time.Clock()
-        self.running = True
-
-        self.power_ups = []
-
-        # Initial boundary
-        self.boundary = pygame.Rect(50, 50, WIDTH - 100, HEIGHT - 100)
-        self.frames_since_last_shrink = 0
-
-    def shrink_boundary(self):
+    def shrink_boundary(self) -> None:
 
         shrink_interval = 120
         shrink_rate = 2
@@ -36,7 +35,7 @@ class Game:
                 self.boundary.y += shrink_rate // 2
             self.frames_since_last_shrink = 0  # Reset the counter
 
-    def draw_boundary(self):
+    def draw_boundary(self) -> None:
 
         pygame.draw.rect(
             WIN, (255, 0, 0), self.boundary, 2
@@ -66,7 +65,7 @@ class Game:
                     self.boundary.y + self.boundary.height - spaceship.rect.height
                 )
 
-    def handle_bullets(self):
+    def handle_bullets(self) -> None:
 
         for bullet in self.yellow.bullets[:]:
             bullet.x += BULLET_VEL
@@ -84,7 +83,7 @@ class Game:
             elif bullet.x < 0:
                 self.red.bullets.remove(bullet)
 
-    def draw(self):
+    def draw(self) -> None:
 
         draw_window(
             WIN,
@@ -102,7 +101,7 @@ class Game:
 
         pygame.display.update()
 
-    def main(self):
+    def main(self) -> None:
 
         while self.running:
             self.clock.tick(FPS)

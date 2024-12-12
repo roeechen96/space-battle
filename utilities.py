@@ -1,9 +1,10 @@
 import os
+from typing import Dict
 
 from constants import *
 
 
-def load_assets():
+def load_assets() -> Dict[str, pygame.Surface]:
     yellow_ship = pygame.image.load(os.path.join(ASSETS_DIR, "spaceship_yellow.png"))
     red_ship = pygame.image.load(os.path.join(ASSETS_DIR, "spaceship_red.png"))
     space_bg = pygame.image.load(os.path.join(ASSETS_DIR, "space.png"))
@@ -20,7 +21,7 @@ def load_assets():
 
 def draw_window(
     win, assets, red, yellow, red_bullets, yellow_bullets, red_health, yellow_health
-):
+) -> None:
     win.blit(assets["space_bg"], (0, 0))
     pygame.draw.rect(win, BLACK, pygame.Rect(WIDTH // 2 - 5, 0, 10, HEIGHT))
 
@@ -39,7 +40,7 @@ def draw_window(
     pygame.display.update()
 
 
-def draw_winner(win, text):
+def draw_winner(win: pygame.Surface, text: str) -> None:
     draw_text = WINNER_FONT.render(text, 1, WHITE)
     win.blit(
         draw_text,
