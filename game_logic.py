@@ -30,16 +30,16 @@ class Game:
             if (
                 self.boundary.width > 200 and self.boundary.height > 200
             ):  # Minimum boundary size
-                self.boundary.inflate_ip(-shrink_rate, -shrink_rate)  # Reduce size
-                self.boundary.x += shrink_rate // 2  # Adjust position
+                self.boundary.inflate_ip(-shrink_rate, -shrink_rate)
+                self.boundary.x += shrink_rate // 2
                 self.boundary.y += shrink_rate // 2
-            self.frames_since_last_shrink = 0  # Reset the counter
+            self.frames_since_last_shrink = 0
 
     def draw_boundary(self) -> None:
 
         pygame.draw.rect(
             WIN, (255, 0, 0), self.boundary, 2
-        )  # Red rectangle for the shrinking boundary
+        )
         pygame.draw.rect(WIN, BLACK, BORDER)
 
     def restrict_to_boundary(self, spaceship):
