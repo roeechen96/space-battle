@@ -5,7 +5,6 @@ Space Battle Game is a fun 2-player Pygame project where players control spacesh
 ## Features
 - **Battle Royale Mode**: The play area shrinks over time, forcing players closer together.
 - **Health Bars**: Visual health indicators above the spaceships.
-- **Power-Ups** (Optional): Add dynamic bonuses during the game.
 - **Custom Spaceships**: Unique movements and controls for each player.
 
 ## How to Play
